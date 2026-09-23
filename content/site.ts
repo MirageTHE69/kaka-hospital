@@ -6,8 +6,25 @@
  * production and shown as a dashed "client to confirm" note in development.
  */
 
+const DEFAULT_URL = "https://kakahospital.com";
+
+/**
+ * Canonical site origin. Tolerates an empty or scheme-less NEXT_PUBLIC_SITE_URL
+ * (e.g. set blank in the Vercel dashboard), which would otherwise break every
+ * `new URL(path, site.url)` call at build time.
+ */
+function resolveSiteUrl(raw: string | undefined) {
+  const v = raw?.trim();
+  if (!v) return DEFAULT_URL;
+  try {
+    return new URL(/^https?:\/\//i.test(v) ? v : `https://${v}`).origin;
+  } catch {
+    return DEFAULT_URL;
+  }
+}
+
 export const site = {
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://kakahospital.com",
+  url: resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL),
   name: "KK Multispeciality Hospital",
   shortName: "KK Hospital",
   alternateName: "Kaka Hospital",
