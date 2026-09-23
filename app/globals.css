@@ -1,0 +1,296 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --radiograph: #0f2a3f;
+  --film: #cfe3ee;
+  --clinic: #fbfcfd;
+  --ward: #2e7d6b;
+  --signal: #d62839;
+  --slate: #334155;
+  /* height of sticky header stack, used for scroll-margin */
+  --header-h: 7.5rem;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-clinic font-sans text-body text-slate antialiased md:text-body-lg;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-bold text-radiograph;
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  [id] {
+    scroll-margin-top: var(--header-h);
+  }
+  /* Visible, consistent focus ring */
+  :focus-visible {
+    outline: 3px solid var(--ward);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  .on-dark :focus-visible,
+  .on-dark:focus-visible {
+    outline-color: var(--film);
+  }
+  a[href^="tel:"],
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-4 md:px-6;
+  }
+  .section {
+    @apply py-14 md:py-24;
+  }
+  .eyebrow {
+    @apply mb-3 inline-flex items-center gap-2 font-display text-[14px] font-semibold tracking-[0.01em] text-ward before:h-0.5 before:w-6 before:rounded-full before:bg-ward;
+  }
+  .eyebrow-dark {
+    @apply mb-3 inline-flex items-center gap-2 font-display text-[14px] font-semibold tracking-[0.01em] text-film before:h-0.5 before:w-6 before:rounded-full before:bg-film;
+  }
+  /* Heading scale — Montserrat. One source of truth for every heading on the site. */
+  .heading-display {
+    @apply font-display text-[38px] font-extrabold leading-[1.08] tracking-[-0.035em] sm:text-[46px] md:text-[56px] lg:text-[62px];
+  }
+  .heading-1 {
+    @apply font-display text-[32px] font-bold leading-[1.14] tracking-[-0.03em] md:text-[44px];
+  }
+  .heading-2 {
+    @apply font-display text-[26px] font-bold leading-[1.2] tracking-[-0.025em] md:text-[36px];
+  }
+  .heading-3 {
+    @apply font-display text-[20px] font-bold leading-[1.3] tracking-[-0.015em] md:text-[23px];
+  }
+  /* Card titles, list titles */
+  .heading-4 {
+    @apply font-display text-[18px] font-bold leading-[1.35] tracking-[-0.01em] md:text-[19px];
+  }
+  /* Large non-heading display text: statements, quotes */
+  .display-lead {
+    @apply font-display text-[20px] font-semibold leading-[1.45] tracking-[-0.015em] md:text-[25px];
+  }
+
+  /* Buttons — pill shape */
+  .btn {
+    @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full px-6 py-3 text-[16px] font-semibold leading-tight transition-colors duration-150;
+  }
+  .btn-primary {
+    @apply btn bg-ward text-white hover:bg-ward-700;
+  }
+  .btn-outline {
+    @apply btn border-2 border-radiograph/80 text-radiograph hover:bg-radiograph hover:text-white;
+  }
+  .btn-light {
+    @apply btn bg-white text-radiograph hover:bg-film;
+  }
+  .btn-outline-light {
+    @apply btn border-2 border-film/60 text-white hover:border-film hover:bg-film/10;
+  }
+  .btn-signal {
+    @apply btn bg-signal text-white hover:bg-signal-600;
+  }
+  .btn-sm {
+    @apply min-h-[40px] px-4 py-2 text-[15px];
+  }
+
+  .link {
+    @apply font-semibold text-ward underline decoration-ward/30 underline-offset-4 transition-colors hover:decoration-ward;
+  }
+
+  /* The lightbox panel */
+  .lightbox {
+    @apply relative isolate overflow-hidden rounded-lightbox bg-radiograph text-film;
+    background-image: radial-gradient(120% 90% at 50% 40%, rgba(207, 227, 238, 0.1), rgba(15, 42, 63, 0) 60%);
+  }
+  .lightbox::before {
+    /* film grain */
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.18;
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .lightbox::after {
+    /* thin lightbox frame */
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(207, 227, 238, 0.25);
+    border-radius: 14px;
+    pointer-events: none;
+  }
+
+  .card {
+    @apply rounded-card border border-slate-200 bg-white;
+  }
+
+  .input {
+    @apply block w-full rounded-input border border-slate-300 bg-white px-4 py-3 text-[16px] text-radiograph placeholder:text-slate-400 focus:border-ward focus:outline-none focus:ring-2 focus:ring-ward/30;
+  }
+  .label {
+    @apply mb-1.5 block text-[15px] font-semibold text-radiograph;
+  }
+
+  /* Long-form article body (blog posts) */
+  .prose-article {
+    @apply max-w-read text-body text-slate md:text-body-lg;
+  }
+  .prose-article h2 {
+    @apply mb-4 mt-12 font-display text-[24px] font-bold leading-[1.25] tracking-[-0.02em] md:text-[28px];
+  }
+  .prose-article h3 {
+    @apply mb-3 mt-10 font-display text-[20px] font-bold leading-snug tracking-[-0.01em];
+  }
+  .prose-article h4 {
+    @apply mb-2 mt-8 font-sans text-[18px] font-semibold text-radiograph;
+  }
+  .prose-article p {
+    @apply my-5;
+  }
+  .prose-article ul,
+  .prose-article ol {
+    @apply my-5 space-y-2 pl-6;
+  }
+  .prose-article ul {
+    @apply list-disc marker:text-ward;
+  }
+  .prose-article ol {
+    @apply list-decimal marker:font-semibold marker:text-ward;
+  }
+  .prose-article strong {
+    @apply font-semibold text-radiograph;
+  }
+  .prose-article a {
+    @apply link;
+  }
+  .prose-article hr {
+    @apply my-10 border-slate-200;
+  }
+  .prose-article blockquote {
+    @apply border-l-4 border-ward pl-5 italic;
+  }
+  .prose-article > :first-child {
+    @apply mt-0;
+  }
+}
+
+/* ---------- Line art ---------- */
+.line-art * {
+  vector-effect: non-scaling-stroke;
+}
+.glow {
+  filter: drop-shadow(0 0 6px rgba(207, 227, 238, 0.55)) drop-shadow(0 0 1px rgba(207, 227, 238, 0.9));
+}
+.glow-signal {
+  filter: drop-shadow(0 0 8px rgba(214, 40, 57, 0.7));
+}
+
+.draw path,
+.draw circle,
+.draw ellipse,
+.draw rect,
+.draw polyline,
+.draw line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+.draw .fill-current {
+  fill-opacity: 0;
+  animation: draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards, fill-in 0.4s 1.4s forwards;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes fill-in {
+  to {
+    fill-opacity: 1;
+  }
+}
+
+/* Emergency ECG sweep */
+.ecg-sweep path {
+  stroke-dasharray: 0.35 0.65;
+  animation: ecg 2.4s linear infinite;
+}
+@keyframes ecg {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Crossfade (home hero) */
+.fade-slot {
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .draw path,
+  .draw circle,
+  .draw ellipse,
+  .draw rect,
+  .draw polyline,
+  .draw line,
+  .draw .fill-current {
+    animation: none;
+    stroke-dashoffset: 0;
+    stroke-dasharray: none;
+    fill-opacity: 1;
+  }
+  .ecg-sweep path {
+    animation: none;
+    stroke-dasharray: none;
+  }
+  .fade-slot {
+    transition: none;
+  }
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+/* Native dialog backdrop for booking modal */
+dialog::backdrop {
+  background: rgba(15, 42, 63, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+/* Hide scrollbar on horizontal scrollers but keep them scrollable */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hollow outline numerals (Our History hero) */
+.text-outline-film {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(207, 227, 238, 0.55);
+}
