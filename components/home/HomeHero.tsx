@@ -113,19 +113,22 @@ export function HomeHero() {
           </div>
         </div>
 
-        <div className="relative">
+        <div className="relative mb-20 md:mb-24">
           <div className="lightbox aspect-[4/5] w-full sm:aspect-[5/4] lg:aspect-[4/5] lg:max-h-[640px]">
-            {doctor.photo && (
+            {/* One photo per slide, crossfading with the headline */}
+            {slides.map((s, i) => (
               <Image
-                src={doctor.photo.src}
-                alt={`${doctor.name}, ${doctor.title} at ${site.name}`}
+                key={s.image.src}
+                src={s.image.src}
+                alt={i === index ? s.image.alt : ""}
+                aria-hidden={i !== index}
                 fill
-                priority
+                priority={i === 0}
                 sizes="(min-width: 1024px) 520px, 100vw"
-                className="-z-10 object-cover object-top"
+                className={`fade-slot -z-10 object-cover object-top ${i === index ? "opacity-100" : "opacity-0"}`}
               />
-            )}
-            <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-radiograph via-radiograph/20 to-transparent" />
+            ))}
+            <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-1/4 bg-gradient-to-t from-radiograph/50 to-transparent" />
 
             {/* Line-art badge — changes with the headline; the knee draws itself on first load */}
             <div className="absolute left-5 top-5 h-28 w-28 rounded-[16px] border border-film/25 bg-radiograph/85 backdrop-blur-sm md:h-32 md:w-32">
@@ -142,21 +145,20 @@ export function HomeHero() {
             <p className="absolute right-6 top-6 rounded-full bg-radiograph/80 px-3 py-1 text-[13px] font-medium tabular text-film backdrop-blur-sm" aria-hidden>
               Since {site.since}
             </p>
-
-            <Link
-              href={`/doctor/${doctor.slug}/`}
-              className="group absolute inset-x-4 bottom-4 flex items-center justify-between gap-4 rounded-card bg-white/95 p-4 shadow-lg backdrop-blur md:inset-x-6 md:bottom-6 md:p-5"
-            >
-              <span>
-                <span className="block text-[14px] font-semibold text-ward">{doctor.title}</span>
-                <span className="heading-3 block text-radiograph group-hover:text-ward">
-                  {doctor.name}
-                </span>
-                <span className="tabular block text-[14px] text-slate-600">{doctor.qualification} · {site.yearsOfService} years of service</span>
-              </span>
-              <ArrowRight className="h-5 w-5 shrink-0 text-ward transition-transform group-hover:translate-x-1" aria-hidden />
-            </Link>
           </div>
+          <Link
+            href={`/doctor/${doctor.slug}/`}
+            className="group absolute inset-x-4 -bottom-20 z-10 flex items-center justify-between gap-4 rounded-card bg-white p-4 shadow-xl shadow-radiograph/15 md:inset-x-8 md:-bottom-24 md:p-5"
+          >
+            <span>
+              <span className="block text-[14px] font-semibold text-ward">{doctor.title}</span>
+              <span className="heading-3 block text-radiograph group-hover:text-ward">
+                {doctor.name}
+              </span>
+              <span className="tabular block text-[14px] text-slate-600">{doctor.qualification} · {site.yearsOfService} years of service</span>
+            </span>
+            <ArrowRight className="h-5 w-5 shrink-0 text-ward transition-transform group-hover:translate-x-1" aria-hidden />
+          </Link>
         </div>
       </div>
     </section>

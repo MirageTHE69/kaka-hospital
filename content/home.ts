@@ -3,10 +3,26 @@ import type { LineArtName } from "@/components/LineArt";
 
 export const home = {
   hero: {
+    /** Each slide has its own photo, line-art badge and headline; they crossfade together. */
     slides: [
-      { headline: "Strong Bones. Strong Life.", art: "knee" as LineArtName, caption: "Knee joint" },
-      { headline: "Back Pain Not Going?", art: "spine" as LineArtName, caption: "Lumbar spine" },
-      { headline: "We Care for Vadodara", art: "hospital" as LineArtName, caption: "Waghodia Road, Vadodara" },
+      {
+        headline: "Strong Bones. Strong Life.",
+        art: "knee" as LineArtName,
+        caption: "Knee joint",
+        image: { src: "/images/dr-alpesh-parekh.png", width: 1080, height: 1350, alt: "Dr. Alpesh Parekh, Orthopaedic Surgeon at KK Multispeciality Hospital" },
+      },
+      {
+        headline: "Back Pain Not Going?",
+        art: "spine" as LineArtName,
+        caption: "Lumbar spine",
+        image: { src: "/images/dr-alpesh-parekh-thumbs-up.png", width: 470, height: 597, alt: "Dr. Alpesh Parekh giving a thumbs up" },
+      },
+      {
+        headline: "We Care for Vadodara",
+        art: "hospital" as LineArtName,
+        caption: "Waghodia Road, Vadodara",
+        image: { src: "/images/dr-alpesh-parekh-thinking.png", width: 542, height: 623, alt: "Dr. Alpesh Parekh listening thoughtfully" },
+      },
     ],
     sub: "KK Multispeciality Hospital is Vadodara's trusted family hospital since 2000",
     trust: ["certified", "24×7 Emergency", "Waghodia Road, Vadodara"],
