@@ -244,7 +244,7 @@
 
 /* Crossfade (home hero) */
 .fade-slot {
-  transition: opacity 700ms ease, transform 700ms ease;
+  transition: opacity 400ms ease, transform 400ms ease;
 }
 
 @media (prefers-reduced-motion: reduce) {

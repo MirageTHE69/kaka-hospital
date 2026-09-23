@@ -11,7 +11,7 @@ import { getDoctor } from "@/content/doctors";
 import { LineArt } from "@/components/LineArt";
 import { OpenBookingButton } from "@/components/booking/BookButtons";
 
-const INTERVAL = 6000;
+const INTERVAL = 3500; // ms each headline stays on screen
 const doctor = getDoctor("dr-alpesh-parekh")!;
 
 export function HomeHero() {
