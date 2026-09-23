@@ -131,7 +131,17 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} KK Multispeciality Hospital Vadodara. All Rights Reserved.
           </p>
-          <p>Designed &amp; developed by {site.designer.name}</p>
+          <p>
+            Designed &amp; developed by{" "}
+            <a
+              href={site.designer.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-film underline decoration-film/40 underline-offset-4 hover:text-white hover:decoration-white"
+            >
+              {site.designer.name}
+            </a>
+          </p>
         </div>
       </div>
     </footer>

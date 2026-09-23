@@ -86,7 +86,7 @@ export const site = {
     directions: "https://www.google.com/maps/dir/?api=1&destination=KK+Multispeciality+Hospital+Waghodia+Road+Vadodara",
   },
 
-  designer: { name: "MirageDevo" },
+  designer: { name: "SNAD MEDIA", url: "https://snadmedia.com/" },
 };
 
 export const telHref = `tel:${site.phone.tel}`;
